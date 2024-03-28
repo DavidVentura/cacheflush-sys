@@ -21,9 +21,18 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg(arch="x86_64")]
     fn it_works_always_on_x86_64() {
         unsafe {
             flush(0xffff00 as *const u8, 4096).unwrap();
+        }
+    }
+
+    #[test]
+    #[cfg(not(arch="x86_64"))]
+    fn it_works_on_non_x86_with_good_values() {
+        unsafe {
+            flush(it_works_on_non_x86_with_good_values as *const u8, 4096).unwrap();
         }
     }
 }
